@@ -1,0 +1,9 @@
+%%El objetivo de este proyecto es analizar las ganancias obtenidas por cada linea de produccion, mes y almacen de distribución de una distribuidora de piezas de motocicletas.
+SELECT product_line,
+		to_char(date,'Month') as month,
+		warehouse,
+	sum(total) - sum(payment_fee) as net_revenue
+from sales
+where client_type='Wholesale'
+group by product_line,warehouse,month
+order by product_line, month, net_revenue desc 
